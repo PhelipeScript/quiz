@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="start()">
   <main class="quiz">
     <div class="pergunta">
       <p class="numero-pergunta">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="conferir-proximo">
-      <button class="conferir">
+      <button onclick="conferir()" class="conferir">
         Conferir resposta
       </button>
 

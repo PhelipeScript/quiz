@@ -24,7 +24,7 @@ body, input, textarea, button {
   border: 1px solid red;
   max-width: 1200px;
   min-height: 700px;
-  margin: 120px auto 0;
+  margin: 4rem auto 0;
   padding: 10px;
   border-radius: 40px;
   display: flex;
@@ -85,6 +85,12 @@ body, input, textarea, button {
   cursor: pointer;
   color: black;
   line-height: 160%;
+  transition: all 0.2s linear;
+}
+
+.alternativa.marcada {
+  background-color: rebeccapurple;
+  color: white;
 }
 
 .conferir-proximo {
