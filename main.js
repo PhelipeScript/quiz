@@ -12,16 +12,42 @@ class Quiz {
   }
 }
 
-// 1 tema - Objeto com 1 pergunta, 5 alternativas, 1 alternativa correta;
-const algoritmos = new Quiz('Qual o nome do carinha que mora logo ali?', 'Phelipe', 'Jorge', 'Cláudio', 'Irineu', 'Cauã', 'Phelipe');
+const desenhoAnimado = [
+  new Quiz('Qual o nome das meninas super poderosas ?', 'Lindinha, Margarita e Melzinho', 'Melzinho, Lindinha e Docinho', 'Florzinha, Melzinho e Docinho', 'Florzinha, Lindinha e Docinho', 'Florzinha, Moranguinho e Lindinha', 'Florzinha, Lindinha e Docinho'),
+
+  new Quiz('Qual o nome do animal de estimação do Bob Esponja ?', 'Jerry', 'Gary', 'Mary', 'Larry', 'Perry', 'Gary'),
+
+  new Quiz('Qual a cor do cabelo da Branca de Neve ?', 'Branco', 'Loiro', 'Preto', 'Ruivo', 'Castanho', 'Preto'),
+
+  new Quiz('O Patolino mora com qual personagem ?', 'Gaguinho', 'Vovó',  'Papa-Léguas', 'Frajola', 'Pernalonga', 'Pernalonga'),
+
+  new Quiz('Qual o nome da mulher do Fred Flintstone ?', 'Wilma Flintstone', 'Betty Flintstone', 'Wilma Rubble', 'Pebbles Flintstone', 'Hanna Flintstone', 'Wilma Flintstone'), 
+
+  new Quiz('Qual o nome do cachorro que tinha no Tom & Jerry ?', 'Pluto', 'Thomas', 'Lupe', 'Spike', 'Bred', 'Spike'),
+
+  new Quiz('Qual o nome do amigo do Bart Simpson ?', 'Milhouse', 'Milcar', 'Millamp', 'Muller', 'Milton', 'Milhouse'),
+
+  new Quiz('Qual o nome do ornitorrinco de Phineas e Ferb ?', 'Gary', 'Perry', 'Lary', 'Terry', 'Berry', 'Perry'), 
+
+  new Quiz('No Bob esponja, a filha do sr. sirigueijo é uma: ', 'Água-viva', 'Caranguejo', 'Baleia', 'Esquilo', 'Camarão', 'Baleia'),
+
+  new Quiz('Em Scooby-Doo, Qual personagem usava óculos ?', 'Scooby', 'Velma', 'Daphne', 'Fred', 'Salsicha', 'Velma')
+];
 
 function start() {
+  const aleatorio = Math.floor(Math.random() * 10);
+  
+  novoQuiz(desenhoAnimado[aleatorio]);
+  
+}
+
+function novoQuiz(quiz) {
   const h2 = document.querySelector('.pergunta > h2');
   const alternativas = document.querySelectorAll('.alternativa');
 
-  h2.innerText = algoritmos.pergunta;
+  h2.innerText = quiz.pergunta;
   for (let i = 0; i < alternativas.length; i++) {
-    alternativas[i].innerText = algoritmos.alternativas[i];
+    alternativas[i].innerText = quiz.alternativas[i];
 
     alternativas[i].addEventListener('click', () => {
       const estaMarcada = alternativas[i].classList.contains('marcada');
@@ -40,21 +66,23 @@ function conferir() {
   const alternativaMarcada = document.querySelector('.marcada');
   if (!alternativaMarcada) return;
 
-  const alternativas = document.querySelectorAll('.alternativa');
   const botaoProx = document.querySelector('.proximo');
-  const botaoConferir = document.querySelector('.conferir');
-  botaoConferir.classList.toggle('sumir');
   botaoProx.classList.toggle('sumir');
 
+  const botaoConferir = document.querySelector('.conferir');
+  botaoConferir.classList.toggle('sumir');
+
+  const alternativas = document.querySelectorAll('.alternativa');
+
   for (let i = 0; i < alternativas.length; i++) {
-    if (alternativas[i].innerText == algoritmos.alternativaCorreta) {
+    if (alternativas[i].innerText == desenhoAnimado[9].alternativaCorreta) {
       alternativas[i].classList.add('acertou');
     } else {
       alternativas[i].classList.add('errou'); 
     }
   }
 
-  if (alternativaMarcada.innerText == algoritmos.alternativaCorreta) {
+  if (alternativaMarcada.innerText == desenhoAnimado[9].alternativaCorreta) {
     alternativaMarcada.classList.add('acertou'); 
   } else {
     alternativaMarcada.classList.add('errou'); 
