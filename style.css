@@ -1,3 +1,11 @@
+:root {
+  --bg: 19, 41, 61;
+  --primary: 27, 152, 224;
+  --secondary: 0, 100, 148;
+  --tertiary: 36, 123, 160;
+  --base: 232, 241, 242;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +14,10 @@
 
 body {
   -webkit-font-smoothing: antialiased;
+  background: url(./assets/black-bg.png) no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(4px);
+
 }
 
 body, input, textarea, button {
@@ -21,7 +33,6 @@ body, input, textarea, button {
 }
 
 .quiz {
-  border: 1px solid red;
   max-width: 1200px;
   min-height: 700px;
   margin: 4rem auto 0;
@@ -32,10 +43,11 @@ body, input, textarea, button {
   gap: 20px;
   align-items: center;
   justify-content: center;
+  background: rgba(24, 23, 23, 0.9);
+  box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.5);
 }
 
 .pergunta {
-  border: 1px solid blue;
   padding: 10px;
   width: 100%;
   max-width: 700px;
@@ -46,6 +58,7 @@ body, input, textarea, button {
   align-items: center;
   justify-content: center;
   position: relative;
+  background: #c6c6c6;
   color: black;
   font-size: 1rem;
   line-height: 140%;
@@ -57,7 +70,7 @@ body, input, textarea, button {
   border: 1px solid;
   border-radius: 9999px;
   padding: 10px 30px;
-  background-color: blue;
+  background: rgba(24, 23, 23, 0.9);
   color: white;
   font-size: 0.865rem;
   line-height: 160%;
@@ -73,7 +86,6 @@ body, input, textarea, button {
 }
 
 .alternativa {
-  border: 1px solid pink;
   width: calc(50% - 10px);
   min-height: 60px;
   padding: 10px;
@@ -83,15 +95,31 @@ body, input, textarea, button {
   justify-content: center;
   border-radius: 6px;
   cursor: pointer;
-  color: black;
+  background: rgba(var(--secondary), 0.2);
+  color: white;
   line-height: 160%;
-  transition: all 0.2s linear;
+  box-shadow: 0 0 0 2px transparent;
+  transition: all 0.1s linear;
 }
 
-.alternativa.marcada {
-  background-color: rebeccapurple;
-  color: white;
+.alternativa:not(.marcada, .acertou, .errou):hover {
+  background: rgba(var(--secondary), 0.3);
+  box-shadow: 0 0 0 2px rgb(var(--secondary));
 }
+
+.alternativa:not(.acertou, .errou).marcada {
+  background-color: rgba(var(--secondary), 0.7);
+  box-shadow: 0 0 0 2px rgb(var(--primary));
+}
+
+.alternativa.acertou {
+  background-color: rgba(0, 128, 0, 0.6);
+}
+
+.alternativa.errou {
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
 
 .conferir-proximo {
   width: 100%;
@@ -106,12 +134,18 @@ body, input, textarea, button {
 .conferir-proximo > button {
   all: unset;
   position: absolute;
-  border: 1px solid orange;
   padding: 10px 30px;
   border-radius: 9999px;
   cursor: pointer;
   color: black;
   line-height: 160%;
+  background: #c6c6c67e;
+  font-size: 1.125rem;
+}
+
+.conferir-proximo > button:hover {
+  background: #c6c6c6;
+  transition: background 0.1s;
 }
 
 .conferir.sumir, .proximo.sumir {

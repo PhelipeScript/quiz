@@ -40,9 +40,23 @@ function conferir() {
   const alternativaMarcada = document.querySelector('.marcada');
   if (!alternativaMarcada) return;
 
+  const alternativas = document.querySelectorAll('.alternativa');
+  const botaoProx = document.querySelector('.proximo');
+  const botaoConferir = document.querySelector('.conferir');
+  botaoConferir.classList.toggle('sumir');
+  botaoProx.classList.toggle('sumir');
+
+  for (let i = 0; i < alternativas.length; i++) {
+    if (alternativas[i].innerText == algoritmos.alternativaCorreta) {
+      alternativas[i].classList.add('acertou');
+    } else {
+      alternativas[i].classList.add('errou'); 
+    }
+  }
+
   if (alternativaMarcada.innerText == algoritmos.alternativaCorreta) {
-    alert('Acertou Mizeravi'); 
+    alternativaMarcada.classList.add('acertou'); 
   } else {
-    alert("Errouuu!");
+    alternativaMarcada.classList.add('errou'); 
   }
 }
