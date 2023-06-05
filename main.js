@@ -1,3 +1,16 @@
+let jaPerguntou = [];
+let indexPergAtual;
+let qtdPerguntasFeitas = 1;
+let acertos = 0;
+let erros = 0;
+
+const alternativas = document.querySelectorAll('.alternativa');
+const alternativaMarcada = document.querySelector('.marcada');
+const botaoProx = document.querySelector('.proximo');
+const botaoConferir = document.querySelector('.conferir');
+const botaoMostrarCorretas = document.querySelector('.mostrar-corretas');
+const numeroPergunta = document.querySelector('.numero-pergunta');
+
 class Quiz {
   constructor (pergunta, alternativa1, alternativa2, alternativa3, alternativa4, alternativa5, alternativaCorreta) {
     this.pergunta = pergunta;
@@ -35,56 +48,87 @@ const desenhoAnimado = [
 ];
 
 function start() {
-  const aleatorio = Math.floor(Math.random() * 10);
-  
-  novoQuiz(desenhoAnimado[aleatorio]);
-  
+  indexPergAtual = Math.floor(Math.random() * 10);
+  novoQuiz(desenhoAnimado[indexPergAtual]);
+  jaPerguntou.push(indexPergAtual);
 }
 
-function novoQuiz(quiz) {
-  const h2 = document.querySelector('.pergunta > h2');
-  const alternativas = document.querySelectorAll('.alternativa');
-
-  h2.innerText = quiz.pergunta;
+(function marcaDesmarca() {
   for (let i = 0; i < alternativas.length; i++) {
-    alternativas[i].innerText = quiz.alternativas[i];
-
     alternativas[i].addEventListener('click', () => {
       const estaMarcada = alternativas[i].classList.contains('marcada');
       
       for (let i = 0; i < alternativas.length; i++) {
         alternativas[i].classList.remove('marcada');
       }
+
       if (!estaMarcada) {
         alternativas[i].classList.add('marcada');
       } 
     })
   }
+}) ();
+
+function novoQuiz(quiz) {
+  const h2 = document.querySelector('.pergunta > h2');
+  h2.innerText = quiz.pergunta;
+  
+  for (let i = 0; i < alternativas.length; i++) {
+    alternativas[i].innerText = quiz.alternativas[i];
+  }
 }
 
-function conferir() {
-  const alternativaMarcada = document.querySelector('.marcada');
-  if (!alternativaMarcada) return;
-
-  const botaoProx = document.querySelector('.proximo');
-  botaoProx.classList.toggle('sumir');
-
-  const botaoConferir = document.querySelector('.conferir');
-  botaoConferir.classList.toggle('sumir');
-
-  const alternativas = document.querySelectorAll('.alternativa');
-
+function mostrarAlternativasCorretas() {
   for (let i = 0; i < alternativas.length; i++) {
-    if (alternativas[i].innerText == desenhoAnimado[9].alternativaCorreta) {
+    if (alternativas[i].innerText == desenhoAnimado[indexPergAtual].alternativaCorreta) {
       alternativas[i].classList.add('acertou');
     } else {
       alternativas[i].classList.add('errou'); 
     }
   }
+}
 
-  if (alternativaMarcada.innerText == desenhoAnimado[9].alternativaCorreta) {
+function proximaPergunta() {
+  if (qtdPerguntasFeitas == 10) {
+    console.log(`Acertou: ${acertos}, Errou: ${erros}`);
+    return;
+  }
+
+  botaoProx.classList.add('sumir');
+
+  botaoConferir.classList.remove('sumir');
+
+  botaoMostrarCorretas.classList.add('sumir'); 
+
+  qtdPerguntasFeitas++;
+  numeroPergunta.innerText = `Pergunta ${qtdPerguntasFeitas} de 10`;
+
+  for (let i = 0; i < alternativas.length; i++) {
+    alternativas[i].classList.remove('acertou', 'errou', 'marcada');
+  }
+
+  do {
+    indexPergAtual = Math.floor(Math.random() * 10);
+  } while(jaPerguntou.includes(indexPergAtual));
+
+  jaPerguntou.push(indexPergAtual);
+
+  novoQuiz(desenhoAnimado[indexPergAtual]);
+}
+
+function conferir() {
+  if (!alternativaMarcada) return;
+
+  botaoProx.classList.toggle('sumir');
+
+  botaoConferir.classList.toggle('sumir');
+
+  if (alternativaMarcada.innerText == desenhoAnimado[indexPergAtual].alternativaCorreta) {
     alternativaMarcada.classList.add('acertou'); 
+    acertos++;
   } else {
     alternativaMarcada.classList.add('errou'); 
+    botaoMostrarCorretas.classList.toggle('sumir'); 
+    erros++;
   }
 }

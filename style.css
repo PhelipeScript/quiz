@@ -129,6 +129,7 @@ body, input, textarea, button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .conferir-proximo > button {
@@ -148,6 +149,10 @@ body, input, textarea, button {
   transition: background 0.1s;
 }
 
-.conferir.sumir, .proximo.sumir {
+.conferir-proximo > .mostrar-corretas {
+  bottom: -50px;
+}
+
+.conferir.sumir, .proximo.sumir, .mostrar-corretas.sumir, .quiz.sumir {
   display: none;
 }
