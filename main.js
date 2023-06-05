@@ -4,13 +4,6 @@ let qtdPerguntasFeitas = 1;
 let acertos = 0;
 let erros = 0;
 
-const alternativas = document.querySelectorAll('.alternativa');
-const alternativaMarcada = document.querySelector('.marcada');
-const botaoProx = document.querySelector('.proximo');
-const botaoConferir = document.querySelector('.conferir');
-const botaoMostrarCorretas = document.querySelector('.mostrar-corretas');
-const numeroPergunta = document.querySelector('.numero-pergunta');
-
 class Quiz {
   constructor (pergunta, alternativa1, alternativa2, alternativa3, alternativa4, alternativa5, alternativaCorreta) {
     this.pergunta = pergunta;
@@ -54,6 +47,8 @@ function start() {
 }
 
 (function marcaDesmarca() {
+  const alternativas = document.querySelectorAll('.alternativa');
+
   for (let i = 0; i < alternativas.length; i++) {
     alternativas[i].addEventListener('click', () => {
       const estaMarcada = alternativas[i].classList.contains('marcada');
@@ -71,6 +66,8 @@ function start() {
 
 function novoQuiz(quiz) {
   const h2 = document.querySelector('.pergunta > h2');
+  const alternativas = document.querySelectorAll('.alternativa');
+
   h2.innerText = quiz.pergunta;
   
   for (let i = 0; i < alternativas.length; i++) {
@@ -79,6 +76,8 @@ function novoQuiz(quiz) {
 }
 
 function mostrarAlternativasCorretas() {
+  const alternativas = document.querySelectorAll('.alternativa');
+
   for (let i = 0; i < alternativas.length; i++) {
     if (alternativas[i].innerText == desenhoAnimado[indexPergAtual].alternativaCorreta) {
       alternativas[i].classList.add('acertou');
@@ -89,20 +88,27 @@ function mostrarAlternativasCorretas() {
 }
 
 function proximaPergunta() {
+
   if (qtdPerguntasFeitas == 10) {
     console.log(`Acertou: ${acertos}, Errou: ${erros}`);
     return;
   }
 
+
+  const botaoProx = document.querySelector('.proximo');
   botaoProx.classList.add('sumir');
 
+  const botaoConferir = document.querySelector('.conferir');
   botaoConferir.classList.remove('sumir');
 
+  const botaoMostrarCorretas = document.querySelector('.mostrar-corretas');
   botaoMostrarCorretas.classList.add('sumir'); 
 
   qtdPerguntasFeitas++;
+  const numeroPergunta = document.querySelector('.numero-pergunta');
   numeroPergunta.innerText = `Pergunta ${qtdPerguntasFeitas} de 10`;
 
+  const alternativas = document.querySelectorAll('.alternativa');
   for (let i = 0; i < alternativas.length; i++) {
     alternativas[i].classList.remove('acertou', 'errou', 'marcada');
   }
@@ -110,19 +116,22 @@ function proximaPergunta() {
   do {
     indexPergAtual = Math.floor(Math.random() * 10);
   } while(jaPerguntou.includes(indexPergAtual));
-
   jaPerguntou.push(indexPergAtual);
-
   novoQuiz(desenhoAnimado[indexPergAtual]);
 }
 
 function conferir() {
+  const alternativaMarcada = document.querySelector('.marcada');
   if (!alternativaMarcada) return;
 
+  const botaoProx = document.querySelector('.proximo');
   botaoProx.classList.toggle('sumir');
 
+  const botaoConferir = document.querySelector('.conferir');
   botaoConferir.classList.toggle('sumir');
 
+  const botaoMostrarCorretas = document.querySelector('.mostrar-corretas');
+  
   if (alternativaMarcada.innerText == desenhoAnimado[indexPergAtual].alternativaCorreta) {
     alternativaMarcada.classList.add('acertou'); 
     acertos++;
