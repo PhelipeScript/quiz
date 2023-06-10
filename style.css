@@ -32,7 +32,7 @@ body, input, textarea, button {
   }
 }
 
-.quiz {
+.quiz, .resultado {
   max-width: 1200px;
   min-height: 700px;
   margin: 4rem auto 0;
@@ -153,6 +153,74 @@ body, input, textarea, button {
   bottom: -50px;
 }
 
-.conferir.sumir, .proximo.sumir, .mostrar-corretas.sumir, .quiz.sumir {
+.conferir.sumir, .proximo.sumir, .mostrar-corretas.sumir, .quiz.sumir, .resultado.sumir {
   display: none;
+}
+
+.resultado {
+  justify-content: flex-start;
+}
+
+table > caption {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 140%;
+  color: #FFF;
+  box-shadow: 0 1px 0  #c6c6c641;
+  margin-bottom: 10px;
+}
+
+table tr + tr {
+  box-shadow: 0 -1px 0 0 #c6c6c6;
+  line-height: 260%;
+  text-decoration: line-through;
+  color: #c6c6c6;
+}
+
+table tr:last-of-type {
+  text-decoration: none;
+}
+
+table th {
+  font-size: 1.125rem;
+  line-height: 160%;
+  color: #c6c6c6b4;
+  padding: 0 20px;
+  border-collapse: collapse;
+}
+
+table th + th {
+  border-left: 2px solid #c6c6c6;
+}
+
+table td {
+  color: rgba(0, 128, 0, 0.6); 
+  text-align: center;
+  font-weight: 700;
+}
+
+table td + td {
+  color: rgba(255, 0, 0, 0.6);
+}
+
+table td span {
+  color: #c6c6c6;
+  font-weight: 400;
+}
+
+.reiniciar {
+  all: unset;
+  padding: 10px 30px;
+  border-radius: 9999px;
+  cursor: pointer;
+  color: black;
+  line-height: 160%;
+  background: #c6c6c67e;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.reiniciar:hover {
+  background: #c6c6c6;
+  transition: background 0.1s;
 }
