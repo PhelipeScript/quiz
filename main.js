@@ -41,6 +41,9 @@ const desenhoAnimado = [
 ];
 
 function start() {
+  const numeroPergunta = document.querySelector('.numero-pergunta');
+  numeroPergunta.innerText = `Pergunta ${qtdPerguntasFeitas} de 10`;
+
   indexPergAtual = Math.floor(Math.random() * 10);
   novoQuiz(desenhoAnimado[indexPergAtual]);
   jaPerguntou.push(indexPergAtual);
@@ -88,12 +91,22 @@ function mostrarAlternativasCorretas() {
 }
 
 function proximaPergunta() {
+  const alternativas = document.querySelectorAll('.alternativa');
+  for (let i = 0; i < alternativas.length; i++) {
+    alternativas[i].classList.remove('acertou', 'errou', 'marcada');
+  }
 
   if (qtdPerguntasFeitas == 10) {
     console.log(`Acertou: ${acertos}, Errou: ${erros}`);
+
+    const quiz = document.querySelector('.quiz')
+    quiz.classList.add('sumir');
+
+    const resultado = document.querySelector('.resultado');
+    resultado.classList.remove('sumir');
+
     return;
   }
-
 
   const botaoProx = document.querySelector('.proximo');
   botaoProx.classList.add('sumir');
@@ -107,11 +120,6 @@ function proximaPergunta() {
   qtdPerguntasFeitas++;
   const numeroPergunta = document.querySelector('.numero-pergunta');
   numeroPergunta.innerText = `Pergunta ${qtdPerguntasFeitas} de 10`;
-
-  const alternativas = document.querySelectorAll('.alternativa');
-  for (let i = 0; i < alternativas.length; i++) {
-    alternativas[i].classList.remove('acertou', 'errou', 'marcada');
-  }
 
   do {
     indexPergAtual = Math.floor(Math.random() * 10);
@@ -140,4 +148,19 @@ function conferir() {
     botaoMostrarCorretas.classList.toggle('sumir'); 
     erros++;
   }
+}
+
+function jogarDeNovo() {
+  jaPerguntou = [];
+  indexPergAtual = '';
+  qtdPerguntasFeitas = 1;
+  acertos = 0;
+  erros = 0;
+  start();
+
+  const resultado = document.querySelector('.resultado');
+  resultado.classList.add('sumir');
+
+  const quiz = document.querySelector('.quiz');
+  quiz.classList.remove('sumir');
 }
