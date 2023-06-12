@@ -91,13 +91,22 @@ function mostrarAlternativasCorretas() {
 }
 
 function proximaPergunta() {
+  const botaoProx = document.querySelector('.proximo');
+  botaoProx.classList.add('sumir');
+
+  const botaoConferir = document.querySelector('.conferir');
+  botaoConferir.classList.remove('sumir');
+
+  const botaoMostrarCorretas = document.querySelector('.mostrar-corretas');
+  botaoMostrarCorretas.classList.add('sumir'); 
+  
   const alternativas = document.querySelectorAll('.alternativa');
   for (let i = 0; i < alternativas.length; i++) {
     alternativas[i].classList.remove('acertou', 'errou', 'marcada');
   }
 
   if (qtdPerguntasFeitas == 10) {
-    console.log(`Acertou: ${acertos}, Errou: ${erros}`);
+    novoResultado(acertos, erros);
 
     const quiz = document.querySelector('.quiz')
     quiz.classList.add('sumir');
@@ -107,15 +116,6 @@ function proximaPergunta() {
 
     return;
   }
-
-  const botaoProx = document.querySelector('.proximo');
-  botaoProx.classList.add('sumir');
-
-  const botaoConferir = document.querySelector('.conferir');
-  botaoConferir.classList.remove('sumir');
-
-  const botaoMostrarCorretas = document.querySelector('.mostrar-corretas');
-  botaoMostrarCorretas.classList.add('sumir'); 
 
   qtdPerguntasFeitas++;
   const numeroPergunta = document.querySelector('.numero-pergunta');
@@ -163,4 +163,16 @@ function jogarDeNovo() {
 
   const quiz = document.querySelector('.quiz');
   quiz.classList.remove('sumir');
+}
+
+function novoResultado(qtdAcertos, qtdErros) {
+  const tbody = document.querySelector('tbody');
+  
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>Acertou: <span>${qtdAcertos}</span></td>
+    <td>Errou: <span>${qtdErros}</span></td>
+  `
+
+  tbody.appendChild(tr);
 }

@@ -170,17 +170,6 @@ table > caption {
   margin-bottom: 10px;
 }
 
-table tr + tr {
-  box-shadow: 0 -1px 0 0 #c6c6c6;
-  line-height: 260%;
-  text-decoration: line-through;
-  color: #c6c6c6;
-}
-
-table tr:last-of-type {
-  text-decoration: none;
-}
-
 table th {
   font-size: 1.125rem;
   line-height: 160%;
@@ -191,6 +180,17 @@ table th {
 
 table th + th {
   border-left: 2px solid #c6c6c6;
+}
+
+table tbody tr  {
+  box-shadow: 0 -1px 0 0 #c6c6c6;
+  line-height: 260%;
+  text-decoration: line-through;
+  color: #c6c6c6;
+}
+
+table tbody tr:last-of-type {
+  text-decoration: none;
 }
 
 table td {
