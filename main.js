@@ -18,28 +18,6 @@ class Quiz {
   }
 }
 
-const desenhoAnimado = [
-  new Quiz('Qual o nome das meninas super poderosas ?', 'Lindinha, Margarita e Melzinho', 'Melzinho, Lindinha e Docinho', 'Florzinha, Melzinho e Docinho', 'Florzinha, Lindinha e Docinho', 'Florzinha, Moranguinho e Lindinha', 'Florzinha, Lindinha e Docinho'),
-
-  new Quiz('Qual o nome do animal de estimação do Bob Esponja ?', 'Jerry', 'Gary', 'Mary', 'Larry', 'Perry', 'Gary'),
-
-  new Quiz('Qual a cor do cabelo da Branca de Neve ?', 'Branco', 'Loiro', 'Preto', 'Ruivo', 'Castanho', 'Preto'),
-
-  new Quiz('O Patolino mora com qual personagem ?', 'Gaguinho', 'Vovó',  'Papa-Léguas', 'Frajola', 'Pernalonga', 'Pernalonga'),
-
-  new Quiz('Qual o nome da mulher do Fred Flintstone ?', 'Wilma Flintstone', 'Betty Flintstone', 'Wilma Rubble', 'Pebbles Flintstone', 'Hanna Flintstone', 'Wilma Flintstone'), 
-
-  new Quiz('Qual o nome do cachorro que tinha no Tom & Jerry ?', 'Pluto', 'Thomas', 'Lupe', 'Spike', 'Bred', 'Spike'),
-
-  new Quiz('Qual o nome do amigo do Bart Simpson ?', 'Milhouse', 'Milcar', 'Millamp', 'Muller', 'Milton', 'Milhouse'),
-
-  new Quiz('Qual o nome do ornitorrinco de Phineas e Ferb ?', 'Gary', 'Perry', 'Lary', 'Terry', 'Berry', 'Perry'), 
-
-  new Quiz('No Bob esponja, a filha do sr. sirigueijo é uma: ', 'Água-viva', 'Caranguejo', 'Baleia', 'Esquilo', 'Camarão', 'Baleia'),
-
-  new Quiz('Em Scooby-Doo, Qual personagem usava óculos ?', 'Scooby', 'Velma', 'Daphne', 'Fred', 'Salsicha', 'Velma')
-];
-
 const matematica = [
   new Quiz('Como é chamado um ângulo com abertura maior que 180° e menor que 360°?', 'Ângulo agudo', 'Ângulo reto', 'Ângulo obtuso', 'Ângulo raso', 'Ângulo Côncavo', 'Ângulo Côncavo'),
 
@@ -62,12 +40,12 @@ const matematica = [
   new Quiz('Qual é o seno de 330°?', '√2/2', '-√3/2', '-1/2', '-√2/2', '√3/2', '-1/2'),
 ]
 
-function start(quiz) {
+function start() {
   const numeroPergunta = document.querySelector('.numero-pergunta');
   numeroPergunta.innerText = `Pergunta ${qtdPerguntasFeitas} de 10`;
 
   indexPergAtual = Math.floor(Math.random() * 10);
-  novoQuiz(quiz[indexPergAtual]);
+  novoQuiz(matematica[indexPergAtual]);
   jaPerguntou.push(indexPergAtual);
 }
 
@@ -101,6 +79,9 @@ function novoQuiz(quiz) {
 }
 
 function mostrarAlternativasCorretas() {
+  const botaoMostrarCorretas = document.querySelector('.mostrar-corretas');
+  botaoMostrarCorretas.classList.add('sumir'); 
+
   const alternativas = document.querySelectorAll('.alternativa');
 
   for (let i = 0; i < alternativas.length; i++) {

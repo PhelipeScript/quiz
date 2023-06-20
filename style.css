@@ -108,7 +108,7 @@ body, input, textarea, button {
 }
 
 .alternativa:not(.acertou, .errou).marcada {
-  background-color: rgba(var(--secondary), 0.7);
+  background-color: rgba(var(--secondary), 0.9);
   box-shadow: 0 0 0 2px rgb(var(--primary));
 }
 
